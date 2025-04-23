@@ -6,24 +6,30 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasUuids;
 
     public $incrementing = false; // ✅ UUID bukan auto-increment
     protected $keyType = 'string';
 
     protected $fillable = [
-        'first_name', 'last_name', 'phone_number', 'address', 'pin', 'balance'
+        'first_name',
+        'last_name',
+        'phone_number',
+        'address',
+        'pin',
+        'balance'
     ];
 
     protected $hidden = [
         'pin',
         'remember_token',
     ];
-    
+
 
     protected static function boot()
     {
